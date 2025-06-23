@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Title - Abdullah Hamouri Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2E2E2E, #1A1A1A);
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background pattern - Consistent across all pages */
+        body::before {
+            /* This is now replaced by the particle canvas animation */
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Header - Reused from main page */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #4A4A4A;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6C63FF;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: #B0B0B0;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #6C63FF;
+        }
+
+        .social-link svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+        }
+
+        .contact-btn {
+            background: #6C63FF;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            background: #5a52e6;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px; /* Space for fixed header */
+            padding-bottom: 3rem; /* Space before footer */
+        }
+
+        .container {
+            max-width: 1000px; /* Slightly narrower container for project details */
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Project Details Section */
+        .project-detail-section {
+            padding: 2.5rem 0;
+            background: #2E2E2E; /* Match other content sections */
+            border-radius: 10px; /* Slightly rounded corners for the whole section */
+            margin: 2rem auto; /* Center the section */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+        }
+
+        .project-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #6C63FF;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .project-media {
+            width: 100%;
+            margin-bottom: 2.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-media img,
+        .project-media video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .trap-interface-img {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 1em;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+
+        .project-overview,
+        .project-sections {
+            background: #1A1A1A; /* Inner sections darker */
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #4A4A4A;
+            margin-bottom: 2rem;
+        }
+
+        .project-overview h2,
+        .project-sections h2 {
+            font-size: 2rem;
+            color: #6C63FF;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(108, 99, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-overview p {
+            font-size: 1.1rem;
+            color: #B0B0B0;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-sections h3 {
+            font-size: 1.5rem;
+            color: #E0E0E0;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-sections p,
+        .project-sections ul {
+            font-size: 1rem;
+            color: #B0B0B0;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .project-sections ul {
+            list-style: none; /* Remove default bullet points */
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .project-sections ul li {
+            position: relative;
+            padding-left: 1.5em; /* Space for custom bullet */
+            margin-bottom: 0.8em;
+        }
+
+        .project-sections ul li::before {
+            content: '\2022'; /* Unicode for a small bullet point */
+            color: #6C63FF; /* Bullet color */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .project-technologies-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag-detail { /* Specific style for detail page tags */
+            background: rgba(108, 99, 255, 0.2);
+            color: #6C63FF;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .project-link-btn {
+            padding: 0.8rem 1.8rem;
+            border: 1px solid #6C63FF;
+            color: #6C63FF;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link-btn:hover {
+            background: #6C63FF;
+            color: #FFFFFF;
+        }
+
+        /* Footer - Reused from main page */
+        .footer {
+            background: #2E2E2E; /* Adjusted to match other sections */
+            padding: 2rem 0;
+            border-top: 1px solid #4A4A4A;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-copyright {
+            color: #B0B0B0;
+        }
+
+        /* Mobile Responsiveness for Project Details Page */
+        @media (max-width: 768px) {
+            .project-detail-section {
+                padding: 3rem 1rem;
+                margin: 1rem auto;
+            }
+
+            .project-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .project-overview h2,
+            .project-sections h2 {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+
+            .project-overview p,
+            .project-sections p,
+            .project-sections ul li {
+                font-size: 0.95rem;
+            }
+
+            .project-sections h3 {
+                font-size: 1.3rem;
+            }
+
+            .tech-tag-detail {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .project-links-detail {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            .project-link-btn {
+                width: 100%;
+                max-width: 250px; /* Limit button width on small screens */
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+                justify-content: center;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-detail-section {
+                padding: 2rem 0.8rem;
+            }
+            .project-title {
+                font-size: 1.8rem;
+            }
+            .project-overview h2,
+            .project-sections h2 {
+                font-size: 1.4rem;
+            }
+            .project-overview p,
+            .project-sections p,
+            .project-sections ul li {
+                font-size: 0.9rem;
+            }
+            .project-sections h3 {
+                font-size: 1.2rem;
+            }
+            .tech-tag-detail {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+            .project-link-btn {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+
+        /* Animation for scroll reveal */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Security Analyst L1</div>
+            <nav class="nav-links">
+                <div class="social-links" aria-label="Social media links">
+                    <a href="https://github.com/abdullahamouri" class="social-link" aria-label="GitHub" rel="noopener" target="_blank">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://app.letsdefend.io/user/abdullahamouri" class="social-link" aria-label="LetsDefend" rel="noopener" target="_blank">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://tryhackme.com/p/abdullahamouri" class="social-link" aria-label="LetsDefend" rel="noopener" target="_blank">
+                        <i class="fa-solid fa-square-binary"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdullah-amouri-71026a256/" class="social-link" aria-label="LinkedIn" rel="noopener" target="_blank">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <a href="index.html#projects" class="contact-btn">Back to Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="project-detail-section container fade-in">
+            <h1 class="project-title">Real-Time Trap system Log System</h1>
+            
+
+            <div class="project-overview fade-in">
+                <h2>Project Overview</h2>
+                <img class="trap-interface-img" src="trap-interface.jpg">
+                <p>This project involved building a real-time web dashboard to monitor and visualize data from a custom Trap system designed for detecting unauthorized access attempts. Through this project, I gained practical system administration experience by deploying the TRAP system on a server, and valuable insights into data visualization and backend development using Flask.</p>
+                <div class="project-technologies-detail">
+                    <span class="tech-tag-detail">Python (Flask)</span>
+                    <span class="tech-tag-detail">JavaScript</span>
+                    <span class="tech-tag-detail">HTML</span>
+                    <span class="tech-tag-detail">CSS</span>
+                    <span class="tech-tag-detail">Chart.js</span>
+                    <span class="tech-tag-detail">JSON</span>
+                    <span class="tech-tag-detail">REST API</span>
+                    <span class="tech-tag-detail">Cloud</span>
+                </div>
+            </div>
+
+            <div class="project-sections fade-in">
+                <h2>Detailed Description</h2>
+                <h3>Background and Motivation</h3>
+                <p>The motivation behind this project was to create a robust and intuitive way to monitor security events generated by a custom-built "Trap" system. This system was designed to simulate a honeypot, capturing and logging unauthorized access attempts. My goal was to transform raw log data into actionable insights through a real-time visual dashboard, making it easier to understand attack patterns and system vulnerabilities.</p>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Real-time Data Visualization: Implemented a web dashboard using Flask and Chart.js to display incoming log data in real-time.</li>
+                    <li>Cloud-Based Network Architecture: Deployed the Trap system and dashboard on separate cloud networks, ensuring secure communication across different environments.</li>
+                    <li>Custom Trap System & Deployment: Developed and deployed a custom "Trap" system to generate security logs, including permissions management and server configuration on Linux.</li>
+                    <li>RESTful API: Created a Flask-based REST API to securely receive and process log data from the Trap system.</li>
+                    <li>Data Parsing and Storage: Designed a mechanism to parse raw log entries and store them efficiently for analysis.</li>
+                    <li>User-Friendly Interface: Utilized Bootstrap for a responsive and intuitive user interface, ensuring accessibility across various devices.</li>
+                </ul>
+
+                <h3>Technical Challenges & Solutions</h3>
+                <p>One significant challenge was ensuring the real-time update of the dashboard without excessive server load. This was addressed by using efficient data streaming techniques and optimizing the API responses. Another challenge involved accurately parsing diverse log formats from the custom trap system, which required robust error handling and flexible parsing logic.</p>
+
+                <!-- <h3>Lessons Learned</h3>
+                <p>This project was a comprehensive learning experience. I significantly enhanced my skills in full-stack web development, particularly with Flask and front-end visualization libraries. I gained a deeper understanding of API design principles, real-time data handling, and the practical aspects of deploying and maintaining a security monitoring system. Furthermore, it solidified my knowledge in system administration and the importance of secure log management.</p> !-->
+            </div>
+        </section>
+    </main>
+
+    <!-- <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                &copy; 2024 Abdullah Amouri. All rights reserved.
+            </div>
+        </div>
+    </footer> !-->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faders = document.querySelectorAll('.fade-in');
+
+            const appearOptions = {
+                threshold: 0.1, // Element is 10% in view
+                rootMargin: "0px 0px -50px 0px" // Adjust to trigger earlier/later
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(
+                entries,
+                appearOnScroll
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            },
+            appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+    <script src="particles.js" defer></script>
+</body>
+</html>

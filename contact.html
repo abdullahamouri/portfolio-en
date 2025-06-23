@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Abdullah Hamouri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* All CSS from cv.html is assumed to be here or in an external file */
+        /* For brevity, including only necessary styles to make this page standalone if needed */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2E2E2E, #1A1A1A);
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body::before {
+            /* This is now replaced by the particle canvas animation */
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #4A4A4A;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6C63FF;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-link {
+            color: #B0B0B0;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .social-link:hover {
+            color: #6C63FF;
+        }
+        .social-link svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+        }
+        .contact-btn {
+            background: #6C63FF;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-btn:hover {
+            background: #5a52e6;
+            transform: translateY(-2px);
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px; /* Updated header height */
+        }
+        .section {
+            width: 100%;
+            padding: 2.5rem 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .contact {
+            width: 100%;
+        }
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #FFFFFF;
+        }
+        .contact-description {
+            color: #B0B0B0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .form-input {
+            background: #2E2E2E;
+            border: 1px solid #4A4A4A;
+            color: #FFFFFF;
+            padding: 1.2rem;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #6C63FF;
+        }
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .send-btn {
+            background: #6C63FF;
+            color: #FFFFFF;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .send-btn:hover {
+            background: #5a52e6;
+            transform: translateY(-2px);
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #6C63FF;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Cyber Security Intern</div>
+            <nav class="nav-links">
+                <div class="social-links" aria-label="Social media links">
+                    <a href="https://github.com/abdullahamouri" class="social-link" aria-label="GitHub" rel="noopener" target="_blank">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://app.letsdefend.io/user/abdullahamouri" class="social-link" aria-label="LetsDefend" rel="noopener" target="_blank">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://tryhackme.com/p/abdullahamouri" class="social-link" aria-label="LetsDefend" rel="noopener" target="_blank">
+                        <i class="fa-solid fa-square-binary"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdullah-amouri-71026a256/" class="social-link" aria-label="LinkedIn" rel="noopener" target="_blank">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <a href="index.html" class="contact-btn">Back</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="contact section" id="contact">
+            <div class="container">
+                <h2 class="section-title fade-in">Contact Me</h2>
+                <div class="contact-content">
+                    <p class="contact-description">I would love to hear about your project or any collaboration opportunities. Feel free to reach out, and I'll get back to you as soon as possible.</p>
+                    <form class="contact-form">
+                        <div class="form-group fade-in">
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-input" required>
+                        </div>
+                        <div class="form-group fade-in">
+                            <input type="email" id="email" name="email" placeholder="Email" class="form-input" required>
+                        </div>
+                        <div class="form-group fade-in">
+                            <textarea id="message" name="message" placeholder="Message" class="form-input form-textarea" required></textarea>
+                        </div>
+                        <button type="submit" class="send-btn fade-in">Send Message</button>
+                    </form>
+                    <a href="index.html" class="home-link">← Back to main page</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="particles.js" defer></script>
+</body>
+</html> 
